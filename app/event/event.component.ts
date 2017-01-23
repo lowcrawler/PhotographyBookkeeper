@@ -1,12 +1,14 @@
 import { Component, Input } from '@angular/core';
+import { Event, Print, Photoshoot, Wedding, Newborn } from '../classes/events';
 
 @Component({
+  moduleId: module.id,
   selector: 'event',
-  template: `<h1>Create New Event {{eventName}}</h1>`,
+  templateUrl: `./event.component.html`,
 })
 
 
 export class EventComponent  {
 @Input()
-	eventName : String;
+	eventName : string;
  }
