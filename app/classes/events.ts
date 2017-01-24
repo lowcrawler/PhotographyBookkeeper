@@ -1,9 +1,12 @@
+import { Client } from './client';
+import { EventType, ShootType } from '../constants';
+
 export class Event {
   constructor(
     public id: number,
-    public name: string,
+    public event_name: string,
     public notes: string,
-    public type: string, //todo: enum (Photoshoot, BookingMeeting, PostShootMeeting, Purchase, Print)
+    public eventType: EventType,
 	public datetime: Date
   ) {}
 }
@@ -12,46 +15,47 @@ export class Event {
 export class Print extends Event {
 	constructor(
 		public id: number,
-		public name: string,
+		public event_name: string,
 		public notes: string,
-		public type: string, //todo: enum (Photoshoot, BookingMeeting, PostShootMeeting, Purchase, Print)
+		public eventType: EventType, //todo: enum (Photoshoot, BookingMeeting, PostShootMeeting, Purchase, Print)
 		public datetime: Date,
 
+		public client: Client,
 		public printType : string //todo: enum  (Single, Album, Card)
 	) {
-		super(id, name, notes, type, datetime);
+		super(id, event_name, notes, eventType, datetime);
 	}
 }
 
 export class Photoshoot extends Event {
 	constructor(
 		public id: number,
-		public name: string,
+		public event_name: string,
 		public notes: string,
-		public type: string, //todo: enum (Photoshoot, BookingMeeting, PostShootMeeting, Purchase, Print)
+		public eventType: EventType, //todo: enum (Photoshoot, BookingMeeting, PostShootMeeting, Purchase, Print)
 		public datetime: Date,
 
-		// todo: client class  public client: client,
+		public client: Client,
 		public hours: number,
 		public photoDueDate: Date,
-		public shootType: string //tood: enum (Family, Senior, Newborn, Wedding, Engagement )
+		public shootType: ShootType //tood: enum (Family, Senior, Newborn, Wedding, Engagement )
 	){
-		super(id, name, notes, type, datetime);
+		super(id, event_name, notes, eventType, datetime);
 	}
 }
 
 export class Wedding extends Photoshoot {
 	constructor(
 		public id: number,
-		public name: string,
+		public event_name: string,
 		public notes: string,
-		public type: string, //todo: enum (Photoshoot, BookingMeeting, PostShootMeeting, Purchase, Print)
+		public eventType: EventType, //todo: enum (Photoshoot, BookingMeeting, PostShootMeeting, Purchase, Print)
 		public datetime: Date,
 
-		// todo: client class  public client: client,
+		public client: Client,
 		public hours: number,
 		public photoDueDate: Date,
-		public shootType: string, //tood: enum (Family, Senior, Newborn, Wedding, Engagement )
+		public shootType: ShootType,
 
 		public vendorInfo: string,
 		public schedule: string,
@@ -59,25 +63,25 @@ export class Wedding extends Photoshoot {
 		public numPhotos: number,
 		public additionalLocations: string
 	){
-		super(id, name, notes, type, datetime, hours, photoDueDate, shootType);
+		super(id, event_name, notes, eventType, datetime, client, hours, photoDueDate, shootType);
 	}
 }
 
 export class Newborn extends Photoshoot {
 	constructor(
 		public id: number,
-		public name: string,
+		public event_name: string,
 		public notes: string,
-		public type: string, //todo: enum (Photoshoot, BookingMeeting, PostShootMeeting, Purchase, Print)
+		public eventType: EventType, //todo: enum (Photoshoot, BookingMeeting, PostShootMeeting, Purchase, Print)
 		public datetime: Date,
 
-		// todo: client class  public client: client,
+		public client: Client,
 		public hours: number,
 		public photoDueDate: Date,
-		public shootType: string, //tood: enum (Family, Senior, Newborn, Wedding, Engagement )
+		public shootType: ShootType, //tood: enum (Family, Senior, Newborn, Wedding, Engagement )
 
 		public estimateDueDate: Date
 	) {
-		super(id, name, notes, type, datetime, hours, photoDueDate, shootType);
+		super(id, event_name, notes, eventType, datetime, client, hours, photoDueDate, shootType);
 	}
 }
