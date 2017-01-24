@@ -3,7 +3,8 @@ export class Event {
     public id: number,
     public name: string,
     public notes: string,
-    public type: string //todo: enum (Photoshoot, BookingMeeting, PostShootMeeting, Purchase, Print)
+    public type: string, //todo: enum (Photoshoot, BookingMeeting, PostShootMeeting, Purchase, Print)
+	public datetime: Date
   ) {}
 }
 
@@ -14,10 +15,11 @@ export class Print extends Event {
 		public name: string,
 		public notes: string,
 		public type: string, //todo: enum (Photoshoot, BookingMeeting, PostShootMeeting, Purchase, Print)
+		public datetime: Date,
 
 		public printType : string //todo: enum  (Single, Album, Card)
 	) {
-		super(id, name, notes, type);
+		super(id, name, notes, type, datetime);
 	}
 }
 
@@ -27,14 +29,14 @@ export class Photoshoot extends Event {
 		public name: string,
 		public notes: string,
 		public type: string, //todo: enum (Photoshoot, BookingMeeting, PostShootMeeting, Purchase, Print)
+		public datetime: Date,
 
 		// todo: client class  public client: client,
-		public datetime: string, //todo: date object
 		public hours: number,
-		public photoDueDate: string, //todo: date object
+		public photoDueDate: Date,
 		public shootType: string //tood: enum (Family, Senior, Newborn, Wedding, Engagement )
 	){
-		super(id, name, notes, type);
+		super(id, name, notes, type, datetime);
 	}
 }
 
@@ -44,11 +46,11 @@ export class Wedding extends Photoshoot {
 		public name: string,
 		public notes: string,
 		public type: string, //todo: enum (Photoshoot, BookingMeeting, PostShootMeeting, Purchase, Print)
+		public datetime: Date,
 
 		// todo: client class  public client: client,
-		public datetime: string, //todo: date object
 		public hours: number,
-		public photoDueDate: string, //todo: date object
+		public photoDueDate: Date,
 		public shootType: string, //tood: enum (Family, Senior, Newborn, Wedding, Engagement )
 
 		public vendorInfo: string,
@@ -67,13 +69,14 @@ export class Newborn extends Photoshoot {
 		public name: string,
 		public notes: string,
 		public type: string, //todo: enum (Photoshoot, BookingMeeting, PostShootMeeting, Purchase, Print)
+		public datetime: Date,
+
 		// todo: client class  public client: client,
-		public datetime: string, //todo: date object
 		public hours: number,
-		public photoDueDate: string, //todo: date object
+		public photoDueDate: Date,
 		public shootType: string, //tood: enum (Family, Senior, Newborn, Wedding, Engagement )
 
-		public estimateDueDate: string //todo: date object
+		public estimateDueDate: Date
 	) {
 		super(id, name, notes, type, datetime, hours, photoDueDate, shootType);
 	}
