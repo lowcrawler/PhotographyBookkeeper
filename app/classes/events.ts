@@ -7,8 +7,11 @@ export class Event {
     public eventName: string,
     public notes: string,
     public eventType: EventType,
-	  public datetime: Date
-  ) {}
+	public date: Date,
+    public time?: any
+  ) {
+      //TODO: split time out from date if it's included in there?
+  }
 }
 
 
