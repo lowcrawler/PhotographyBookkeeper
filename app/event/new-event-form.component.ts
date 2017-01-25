@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Event, Print, Photoshoot, Wedding, Newborn } from '../classes/events';
 import { Client } from '../classes/client';
 import { EventType, ShootType } from '../constants';
+import { DateService } from '../utilities/date.service';
 import { EnumService } from '../utilities/enum.service';
 
 @Component({
@@ -14,26 +15,30 @@ import { EnumService } from '../utilities/enum.service';
 
 export class NewEventForm implements OnInit {
 
+    eventTypes : string[] = EnumService.enumToStringArrayFavorWhitespace(EventType);
+    shootTypes : string[] = EnumService.enumToStringArrayFavorWhitespace(ShootType);
+    test_date1:Date = new Date(2017,7,28);
+    event : Event = new Event(123, "test event", "test notes", EventType.Purchase, this.test_date1);
 
-
-eventTypes : string[] = EnumService.enumToStringArrayFavorWhitespace(EventType);
-shootTypes : string[] = EnumService.enumToStringArrayFavorWhitespace(ShootType);
-test_date1:Date = new Date(2017,7,28);
-event : Event = new Event(123, "test event", "test notes", EventType.Purchase, this.test_date1);
+constructor() { }
 
  ngOnInit():void {
      console.log("NewEventForm ngOnInit");
+     let temp = DateService.parseDate("2012/07/30");
+     console.log(temp);
  }
 
  get diagnostic() { return JSON.stringify(this.event)};
 
- public parseDate(dateString: string): Date {
-     if (dateString) {
-         return new Date(dateString);
-     } else {
-         return null;
-     }
- }
+ get parseDate() { return DateService.parseDate };
+
+ // public parseDate(dateString: string): Date {
+ //     if (dateString) {
+ //         return new Date(dateString);
+ //     } else {
+ //         return null;
+ //     }
+ // }
 
 //etype : string[] = ["purchase", "post shoot meeting", "booking meeting", "photoshoot"];
 	// ngOnInit():void {
