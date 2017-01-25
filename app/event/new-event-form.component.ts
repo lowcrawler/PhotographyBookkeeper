@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Event, Print, Photoshoot, Wedding, Newborn } from '../classes/events';
 import { Client } from '../classes/client';
 import { EventType, ShootType } from '../constants';
+import { EnumService } from '../utilities/enum.service';
 
 @Component({
   moduleId: module.id,
@@ -15,37 +16,10 @@ export class NewEventForm implements OnInit {
 
 
 
-eventTypes : string[] = [];
-
+eventTypes : string[] = EnumService.enumToStringArrayFavorWhitespace(EventType);
+shootTypes : string[] = EnumService.enumToStringArrayFavorWhitespace(ShootType);
  ngOnInit():void {
-
-
-
-   console.log("NewEventForm ngOnInit");
-   console.log(EventType);
-
-   // TODO: test all orders of insertion
-
-    for (var item in EventType) {
-      if (/\s/.test(item)) { // item contains a whitespace character....
-        // check if there is a non-whitespaced item that matches
-        let index = this.eventTypes.indexOf(item.replace(/\s/g,''));
-        if(index >-1) {
-          this.eventTypes[index] = item; //... replace the no-whitespace version with the whitespace version
-            continue;
-        }
-        this.eventTypes.push(item); // ... if there wasn't a no-whitespace version, push the whitespace version
-      }
-
-    //before pushing the non-whitespaced item, make sure there isn't a whitespaced version:
-    for (var entry in this.eventTypes) {
-      //TODO: check that whitespaced version
-    }
-    this.eventTypes.push(item); //need to verify a 'spaced' version doesn't already exist before adding.
-
-     }
-     console.log("EVENT TYPE:");
-     console.log(this.eventTypes);
+     console.log("NewEventForm ngOnInit");
  }
 
 

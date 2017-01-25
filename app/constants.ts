@@ -11,5 +11,5 @@ export enum ShootType {
 	Senior = <any>"Senior",
 	Newborn = <any>"Newborn",
 	Wedding = <any>"Wedding",
-	Engagement = <any>"Engagment"
+	Engagement = <any>"Engagement"
 }
