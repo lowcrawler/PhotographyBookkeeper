@@ -1,32 +1,46 @@
 {{diagnostic}}
 <div class="container">
     <h2>New Event Form!</h2>
-    <form>
-        <div class="form-group">
+	<button type="button" class="btn btn-default" [disabled]="true">Find existing event</button>
+    <form (ngSubmit)="onSubmit()" #eventForm="ngForm">
+
+	    <div class="form-group"> <!-- TODO: this is a terrible date picker, material design should have a better one -->
           <label for="date">Date</label>
           <input type="date" class="form-control" id="date" required
-            [value]="event.date | date: 'yyyy-MM-dd'" (input)="event.date=parseDate($event.target.value)" name="date">
+            [value]="event.date | date: 'yyyy-MM-dd'"
+			(input)="event.date=parseDate(date.value)"
+			name="date" #date>
         </div>
+		<div [hidden]="dateIsValid(date.value)" class="alert alert-danger">
+			Date is invalid
+		</div>
+
         <div class="form-group">
           <label for="time">Time</label>
-          <input type="time" class="form-control" id="time" required [(ngModel)]="event.time" name="time">
+          <input type="time" class="form-control" id="time"
+		   		[(ngModel)]="event.time" name="time">
         </div>
-      <div class="form-group">
+
+	  <div class="form-group">
         <label for="eventName">Event Name</label>
         <input type="text" class="form-control" id="eventName" [(ngModel)]="event.eventName" name="eventName">
       </div>
       <div class="form-group">
         <label for="eventType">Event Type</label>
-        <select class="form-control" id="eventType" required [(ngModel)]="event.eventType" name="eventType">
+        <select class="form-control" id="eventType" required [(ngModel)]="event.eventType" name="eventType" #eventType="ngModel">
           <option *ngFor="let evtTyp of eventTypes" [value]="evtTyp">{{evtTyp}}</option>
         </select>
-      </div>
-      <div class="form-group">
+   			<div [hidden]="eventType.valid || eventType.pristine" class="alert alert-danger">
+		   		Event Type is required
+   			</div>
+      </div> <!--next TODO: expand form depending on type -->
+
+	  <div class="form-group">
         <label for="notes">Notes</label>
         <input type="text" class="form-control" id="notes" [(ngModel)]="event.notes" name="notes">
       </div>
 
-
-      <button type="submit" class="btn btn-default">Submit</button>
+      <button type="submit" class="btn btn-default" [disabled]="!eventForm.form.valid">Submit</button> <!--TODO -- how to reset the form from component (after ajax success)-->
     </form>
+	<button type="button" class="btn btn-default" (click)="newEvent(); eventForm.reset()">Reset Event</button>
 </div>

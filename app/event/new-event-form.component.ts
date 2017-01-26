@@ -18,27 +18,29 @@ export class NewEventForm implements OnInit {
     eventTypes : string[] = EnumService.enumToStringArrayFavorWhitespace(EventType);
     shootTypes : string[] = EnumService.enumToStringArrayFavorWhitespace(ShootType);
     test_date1:Date = new Date(2017,7,28);
-    event : Event = new Event(123, "test event", "test notes", EventType.Purchase, this.test_date1);
+    // event : Event = new Event(123, "test event", "test notes", EventType.Purchase, this.test_date1);
+    event:Event;
 
 constructor() { }
 
  ngOnInit():void {
-     console.log("NewEventForm ngOnInit");
-     let temp = DateService.parseDate("2012/07/30");
-     console.log(temp);
+	 this.newEvent();
  }
 
- get diagnostic() { return JSON.stringify(this.event)};
+	newEvent():void {
+		this.event = new Event(123, "", "", null, new Date());
+	}
 
- get parseDate() { return DateService.parseDate };
+	get diagnostic() { return JSON.stringify(this.event)};
 
- // public parseDate(dateString: string): Date {
- //     if (dateString) {
- //         return new Date(dateString);
- //     } else {
- //         return null;
- //     }
- // }
+	get parseDate() { return DateService.parseDate };
+
+	get dateIsValid() { return DateService.dateIsValid };
+
+	onSubmit():void {
+		alert("Submitted (not really)");
+		this.newEvent();
+	}
 
 //etype : string[] = ["purchase", "post shoot meeting", "booking meeting", "photoshoot"];
 	// ngOnInit():void {

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as moment from 'moment';
 
 @Injectable()
 export class DateService {
@@ -13,5 +14,9 @@ export class DateService {
        }
    }
 
+
+   public static dateIsValid(datestring:string):boolean {
+   		return moment(datestring, "YYYY-MM-DD", true).isValid();
+   }
 
 }
