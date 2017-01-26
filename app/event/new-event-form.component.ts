@@ -17,8 +17,6 @@ export class NewEventForm implements OnInit {
 
     eventTypes : string[] = EnumService.enumToStringArrayFavorWhitespace(EventType);
     shootTypes : string[] = EnumService.enumToStringArrayFavorWhitespace(ShootType);
-    test_date1:Date = new Date(2017,7,28);
-    // event : Event = new Event(123, "test event", "test notes", EventType.Purchase, this.test_date1);
     event:Event;
 
 constructor() { }

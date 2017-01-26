@@ -1,8 +1,7 @@
 
 export enum EventType {
     Photoshoot = <any>"Photoshoot",
-	BookingMeeting = <any>"Booking Meeting",
-	PostShootMeeting = <any>"Post Shoot Meeting",
+	Meeting = <any>"Meeting",
 	Purchase = <any>"Purchase",
 	Print = <any>"Print"
 }
