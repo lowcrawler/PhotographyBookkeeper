@@ -1,0 +1,171 @@
+{{diagnostic}}
+<div class="container">
+    <h2>New Event Form!</h2>
+	<button type="button" class="btn btn-default" [disabled]="true">Find existing event</button>
+    <form (ngSubmit)="onSubmit()" #eventForm="ngForm">
+
+	    <div class="form-group"> <!-- TODO: this is a terrible date picker, material design should have a better one -->
+          <label for="date">Date</label>
+          <input type="date" class="form-control" id="date" required
+            [value]="event.date | date: 'yyyy-MM-dd'"
+			(input)="event.date=parseDate(date.value)"
+			name="date" #date>
+        </div>
+		<div [hidden]="dateIsValid(date.value)" class="alert alert-danger">
+			Date is invalid
+		</div>
+
+	  <div class="form-group">
+        <label for="eventName">Event Name</label>
+        <input type="text" class="form-control" id="eventName" [(ngModel)]="event.eventName" name="eventName">
+      </div>
+
+      <div class="form-group">
+        <label for="eventType">Event Type</label>
+        <select class="form-control" id="eventType" required [(ngModel)]="event.eventType" name="eventType" #eventType="ngModel">
+          <option *ngFor="let evtTyp of eventTypes" [value]="evtTyp">{{evtTyp}}</option> <!-- TODO: based on change, change the event object type (make new one?)-->
+        </select>
+   			<div [hidden]="eventType.valid || eventType.pristine" class="alert alert-danger">
+		   		Event Type is required
+   			</div>
+      </div>
+
+        <div *ngIf="eventType.value=='Print'"> <!--TODO: pull this equality from constant-->
+            <!--TODO: Client-->
+            <div class="form-group">
+              <label for="printType">Type of Print</label>  <!-- TODO: enum -->
+              <input type="text" class="form-control" id="printType" [(ngModel)]="event.printType" name="printType">
+            </div>
+            <!--TODO: Print specifics type sting-->
+            <div class="form-group">
+              <label for="printType">Price to Client</label>
+              <input type="number" class="form-control" id="priceToClient" [(ngModel)]="event.priceToClient" name="priceToClient">
+            </div>
+        </div> <!-- end eventType.value='Print'-->
+
+        <div *ngIf="eventType.value=='Meeting'"> <!--TODO: pull this equality from constant-->
+            <!--TODO: Client-->
+            <div class="form-group">
+              <label for="preShootMeeting">Pre-Shooting Meeting</label>  <!-- TODO: enum -->
+              <input type="checkbox" class="form-control" id="preShootMeeting" [(ngModel)]="event.preShootMeeting" name="preShootMeeting">
+            </div>
+            <div class="form-group">
+              <label for="location">Location</label>
+              <input type="text" class="form-control" id="location" [(ngModel)]="event.location" name="location">
+            </div>
+        </div> <!-- end eventType.value='Print'-->
+
+        <div *ngIf="eventType.value=='Purchase'"> <!--TODO: pull this equality from constant-->
+            <!--TODO: Client-->
+            <div class="form-group">
+              <label for="amount">Amount</label>
+              <input type="number" class="form-control" id="amount" [(ngModel)]="event.amount" name="amount" required>
+            </div>
+            <div class="form-group">
+              <label for="accountingCategory">Accounting Category</label>
+              <input type="string" class="form-control" id="accountingCategory" [(ngModel)]="event.accountingCategory" name="accountingCategory"> <!-- TODO: select class based on enum-->
+            </div>
+            <div class="form-group">
+              <label for="itemDescription">Item Description</label>
+              <input type="string" class="form-control" id="itemDescription" [(ngModel)]="event.itemDescription" name="itemDescription" required>
+            </div>
+            <div class="form-group">
+              <label for="haveReceipt">Have Reciept</label>
+              <input type="checkbox" class="form-control" id="haveReceipt" [(ngModel)]="event.haveReceipt" name="haveReceipt">
+            </div>
+            <!--TODO: "forEvent" ... build an event search/picker -->
+        </div> <!-- end eventType.value==Purchase-->
+
+
+      <div *ngIf="eventType.value=='Photoshoot'"> <!--TODO: pull this equality from constant-->
+
+          <div class="form-group">
+            <label for="time">Time</label>
+            <input type="time" class="form-control" id="time"
+                [(ngModel)]="event.time" name="time">
+          </div>
+
+          <!--TODO: Client-->
+
+          <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" class="form-control" id="location" [(ngModel)]="event.location" name="location">
+          </div>
+
+          <div class="form-group"><!-- TODO: change to custom hours input -->
+            <label for="hours">Hours</label>
+            <input type="number" class="form-control" id="hours" [(ngModel)]="event.hours" name="hours">
+          </div>
+
+          <div class="form-group"> <!-- TODO: this is a terrible date picker, material design should have a better one at some point-->
+              <label for="photoDueDate">Photo Due Date</label>
+              <input type="date" class="form-control" id="photoDueDate" required
+                [value]="event.photoDueDate | date: 'yyyy-MM-dd'"
+              (input)="event.photoDueDate=parseDate(photoDueDate.value)"
+              name="photoDueDate" #photoDueDate>
+            </div>
+          <div [hidden]="dateIsValid(photoDueDate.value)" class="alert alert-danger">
+              Photo Due Date is invalid
+          </div>
+
+          <div class="form-group">
+            <label for="shootType">Shoot Type</label>
+            <select class="form-control" id="shootType" required [(ngModel)]="event.shootType" name="shootType" #shootType="ngModel">
+              <option *ngFor="let shootTyp of shootTypes" [value]="shootTyp">{{shootTyp}}</option>
+            </select>
+                <div [hidden]="shootType.valid || shootType.pristine" class="alert alert-danger">
+                    Shoot Type is required
+                </div>
+          </div>
+
+
+          <div *ngIf="shootType.value=='Wedding'"> <!--TODO: pull this equality from constant-->
+              <div class="form-group">
+                  <label for="vendorInfo">Vendor Info</label>
+                  <input type="text" class="form-control" id="vendorInfo" [(ngModel)]="event.vendorInfo" name="vendorInfo"> <!--TODO: textarea-->
+            </div>
+              <div class="form-group">
+                  <label for="schedule">Schedule</label> <!--TODO:future - schedule widget, pulling locations, distances, hours, etc -->
+                  <input type="text" class="form-control" id="schedule" [(ngModel)]="event.schedule" name="schedule"> <!--TODO: textarea-->
+            </div>
+              <div class="form-group">
+                  <label for="vipInfo">VIP Info</label>
+                  <input type="text" class="form-control" id="vipInfo" [(ngModel)]="event.vipInfo" name="vipInfo"> <!--TODO: textarea-->
+            </div>
+            <div class="form-group">
+              <label for="numPhotos">Number Photos to Deliver</label>
+              <input type="number" class="form-control" id="numPhotos" [(ngModel)]="event.numPhotos" name="numPhotos">
+            </div>
+            <div class="form-group"> <!--TODO:future fill out multiple, use as dropdowns in schedule widget- -->
+                <label for="additionalLocations">Additional Locations</label>
+                <input type="text" class="form-control" id="additionalLocations" [(ngModel)]="event.additionalLocations" name="additionalLocations">
+          </div>
+      </div> <!-- end shootType.value is Wedding-->
+
+      <div *ngIf="shootType.value=='Newborn'"> <!--TODO: pull this equality from constant-->
+                    <div class="form-group"> <!-- TODO: this is a terrible date picker, material design should have a better one -->
+                        <label for="estimatedDueDate">Estimated Due Date</label> <!--TODO: limit this to only future dates -->
+                        <input type="date" class="form-control" id="estimatedDueDate" required
+                          [value]="event.estimatedDueDate | date: 'yyyy-MM-dd'"
+                        (input)="event.estimatedDueDate=parseDate(estimatedDueDate.value)"
+                        name="estimatedDueDate" #estimatedDueDate>
+                      </div>
+                    <div [hidden]="dateIsValid(estimatedDueDate.value)" class="alert alert-danger">
+                        Estimated Due Date is invalid
+                    </div>
+      </div> <!-- end shootType.value is Newborn-->
+  </div> <!-- end eventType.value is Photoshoot-->
+
+
+
+
+
+	  <div class="form-group">
+        <label for="notes">Notes</label>
+        <input type="text" class="form-control" id="notes" [(ngModel)]="event.notes" name="notes">
+      </div>
+
+      <button type="submit" class="btn btn-default" [disabled]="!eventForm.form.valid">Submit</button> <!--TODO -- how to reset the form from component (after ajax success)-->
+    </form>
+	<button type="button" class="btn btn-default" (click)="newEvent(); eventForm.reset()">Reset Event</button>
+</div>
