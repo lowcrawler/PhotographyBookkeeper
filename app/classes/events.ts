@@ -23,9 +23,9 @@ export class Meeting extends Event {
 
 	    public client: Client,
         public location: string,
-        public preShootMeeting: boolean 
+        public preShootMeeting: boolean
     ) {
-    super(eventID, eventName, notes, eventType, date);
+    super(eventID, eventName, notes, eventType, dateTime);
     }
 }
 
@@ -74,7 +74,7 @@ export class Photoshoot extends Event {
 		public client: Client,
 		public hours: number,
 		public photoDueDate: Date,
-        public location: string,
+        public location: string, //TODO: locationID in DB ...
 		public shootType: ShootType
 	){
 		super(eventID, eventName, notes, eventType, dateTime);
@@ -96,10 +96,11 @@ export class Wedding extends Photoshoot {
 		public shootType: ShootType,
 
 		public vendorInfo: string,
-		public schedule: string,
+		public schedule: string, //TODO: schedule widget ... json object
 		public vipInfo: string,
 		public numPhotos: number,
-		public additionalLocations: string //TODO:future more wedding info -- special shots, likes/dislikes, referral, etc
+		public additionalLocations: string
+        //TODO:future more wedding info -- special shots, likes/dislikes, referral (previous client, photographer, other), etc
 	){
 		super(eventID, eventName, notes, eventType, datetime, client, hours, photoDueDate, location, shootType);
 	}
