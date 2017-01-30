@@ -3,7 +3,7 @@ import { EventType, ShootType } from '../constants';
 
 export class Event {
   constructor(
-    public eventID: number,
+    public eventID: string,
     public eventName: string,
     public notes: string,
     public eventType: EventType,
@@ -15,7 +15,7 @@ export class Event {
 
 export class Meeting extends Event {
     constructor(
-        public eventID: number,
+        public eventID: string,
         public eventName: string,
         public notes: string,
         public eventType: EventType,
@@ -31,7 +31,7 @@ export class Meeting extends Event {
 
 export class Purchase extends Event {
     constructor(
-        public eventID: number,
+        public eventID: string,
         public eventName: string,
         public notes: string,
         public eventType: EventType,
@@ -49,7 +49,7 @@ export class Purchase extends Event {
 
 export class Print extends Event {
 	constructor(
-		public eventID: number,
+		public eventID: string,
 		public eventName: string,
 		public notes: string,
 		public eventType: EventType,
@@ -65,7 +65,7 @@ export class Print extends Event {
 
 export class Photoshoot extends Event {
 	constructor(
-		public eventID: number,
+		public eventID: string,
 		public eventName: string,
 		public notes: string,
 		public eventType: EventType,
@@ -83,7 +83,7 @@ export class Photoshoot extends Event {
 
 export class Wedding extends Photoshoot {
 	constructor(
-		public eventID: number,
+		public eventID: string,
 		public eventName: string,
 		public notes: string,
 		public eventType: EventType,
@@ -108,7 +108,7 @@ export class Wedding extends Photoshoot {
 
 export class Newborn extends Photoshoot {
 	constructor(
-		public eventID: number,
+		public eventID: string,
 		public eventName: string,
 		public notes: string,
 		public eventType: EventType,

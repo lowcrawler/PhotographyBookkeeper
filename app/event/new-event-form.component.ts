@@ -30,6 +30,11 @@ constructor() { }
 		this.event = new Event(UUID.UUID(), "", "", null, new Date());
 	}
 
+    resetForm():void {
+        console.error("resetting the form is not implemented yet.");
+        //TODO
+    }
+
 	get diagnostic() { return JSON.stringify(this.event)};
 
 	get parseDate() { return DateService.parseDate };
