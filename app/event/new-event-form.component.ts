@@ -4,6 +4,7 @@ import { Client } from '../classes/client';
 import { EventType, ShootType } from '../constants';
 import { DateService } from '../utilities/date.service';
 import { EnumService } from '../utilities/enum.service';
+import { UUID } from 'angular2-uuid';
 
 @Component({
   moduleId: module.id,
@@ -26,8 +27,13 @@ constructor() { }
  }
 
 	newEvent():void {
-		this.event = new Event(123, "", "", null, new Date());
+		this.event = new Event(UUID.UUID(), "", "", null, new Date());
 	}
+
+    resetForm():void {
+        console.error("resetting the form is not implemented yet.");
+        //TODO
+    }
 
 	get diagnostic() { return JSON.stringify(this.event)};
 

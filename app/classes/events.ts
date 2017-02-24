@@ -3,7 +3,7 @@ import { EventType, ShootType } from '../constants';
 
 export class Event {
   constructor(
-    public eventID: number,
+    public eventID: string,
     public eventName: string,
     public notes: string,
     public eventType: EventType,
@@ -15,7 +15,7 @@ export class Event {
 
 export class Meeting extends Event {
     constructor(
-        public eventID: number,
+        public eventID: string,
         public eventName: string,
         public notes: string,
         public eventType: EventType,
@@ -23,15 +23,15 @@ export class Meeting extends Event {
 
 	    public client: Client,
         public location: string,
-        public preShootMeeting: boolean 
+        public preShootMeeting: boolean
     ) {
-    super(eventID, eventName, notes, eventType, date);
+    super(eventID, eventName, notes, eventType, dateTime);
     }
 }
 
 export class Purchase extends Event {
     constructor(
-        public eventID: number,
+        public eventID: string,
         public eventName: string,
         public notes: string,
         public eventType: EventType,
@@ -49,7 +49,7 @@ export class Purchase extends Event {
 
 export class Print extends Event {
 	constructor(
-		public eventID: number,
+		public eventID: string,
 		public eventName: string,
 		public notes: string,
 		public eventType: EventType,
@@ -65,7 +65,7 @@ export class Print extends Event {
 
 export class Photoshoot extends Event {
 	constructor(
-		public eventID: number,
+		public eventID: string,
 		public eventName: string,
 		public notes: string,
 		public eventType: EventType,
@@ -74,7 +74,7 @@ export class Photoshoot extends Event {
 		public client: Client,
 		public hours: number,
 		public photoDueDate: Date,
-        public location: string,
+        public location: string, //TODO: locationID in DB ...
 		public shootType: ShootType
 	){
 		super(eventID, eventName, notes, eventType, dateTime);
@@ -83,7 +83,7 @@ export class Photoshoot extends Event {
 
 export class Wedding extends Photoshoot {
 	constructor(
-		public eventID: number,
+		public eventID: string,
 		public eventName: string,
 		public notes: string,
 		public eventType: EventType,
@@ -96,10 +96,11 @@ export class Wedding extends Photoshoot {
 		public shootType: ShootType,
 
 		public vendorInfo: string,
-		public schedule: string,
+		public schedule: string, //TODO: schedule widget ... json object
 		public vipInfo: string,
 		public numPhotos: number,
-		public additionalLocations: string //TODO:future more wedding info -- special shots, likes/dislikes, referral, etc
+		public additionalLocations: string
+        //TODO:future more wedding info -- special shots, likes/dislikes, referral (previous client, photographer, other), etc
 	){
 		super(eventID, eventName, notes, eventType, datetime, client, hours, photoDueDate, location, shootType);
 	}
@@ -107,7 +108,7 @@ export class Wedding extends Photoshoot {
 
 export class Newborn extends Photoshoot {
 	constructor(
-		public eventID: number,
+		public eventID: string,
 		public eventName: string,
 		public notes: string,
 		public eventType: EventType,
