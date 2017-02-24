@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Event, Print, Photoshoot, Wedding, Newborn } from '../classes/events';
 import { Client } from '../classes/client';
 import { EventType, ShootType } from '../constants';
-import { DateService } from '../utilities/date.service';
-import { EnumService } from '../utilities/enum.service';
+import { DateService } from '../services/date.service';
+import { EnumService } from '../services/enum.service';
 import { UUID } from 'angular2-uuid';
 
 @Component({
