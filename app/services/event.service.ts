@@ -3,13 +3,19 @@
 import { Injectable } from '@angular/core';
 import { Event, Print, Photoshoot, Wedding, Newborn } from '../classes/events';
 
+export const EVENTS:string[]=[
+    "Blergh", "Blarch", "Blech"
+];
+
 @Injectable()
 export class EventService {
 
-    getAllEvents():Event[] { return null; } //TODO: stub
+    getAllEvents():string[] { return EVENTS; } //TODO: stub
 
-    getEvent(eventID:string):Event { return null; } //TODO: stub
+    getEventByID(eventID:string):Event { return null; } //TODO: stub
 
     saveEvent(event:Event):boolean {return true;} //TODO: stub
+
+
 
 }
