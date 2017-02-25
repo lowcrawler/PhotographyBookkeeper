@@ -24,5 +24,6 @@ export class AppComponent implements OnInit {
     ngOnInit():void {
         this.evtVar = "Hiya";
         this.evtVar = this.eventService.getAllEvents();
+        console.log(this.evtVar);
     }
 }
