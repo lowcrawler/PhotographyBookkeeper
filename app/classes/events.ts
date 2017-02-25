@@ -1,5 +1,5 @@
 import { Client } from './client';
-import { EventType, ShootType } from '../constants';
+import { EventType, ShootType, AccountingCategory } from '../constants';
 
 export class Event {
   constructor(
@@ -38,7 +38,7 @@ export class Purchase extends Event {
         public date: Date,
 
         public amount: number,
-        public accountingCategory: string, //TOOD: enum
+        public accountingCategory: AccountingCategory, //TOOD: enum
         public itemDescription: string,
         public haveReceipt: boolean,
         public forEvent?: number

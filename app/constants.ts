@@ -12,3 +12,16 @@ export enum ShootType {
 	Wedding = <any>"Wedding",
 	Engagement = <any>"Engagement"
 }
+export enum AccountingCategory {
+	Equipment = <any>"Equipment",
+	COGS = <any>"Cost of Goods Sold",
+	Shipping = <any>"Shipping",
+	Travel = <any>"Travel",
+	Rentals = <any>"Rental",
+	Repairs = <any>"Repairs",
+	ProfServ = <any>"Professional Services",
+	ME = <any>"Meals and Entertainment",
+	Payroll = <any>"Payroll",
+	Advertising = <any>"Advertising",
+	Other = <any>"Other/Unknown"
+}
