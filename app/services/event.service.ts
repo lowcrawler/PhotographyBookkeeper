@@ -34,11 +34,39 @@ export class EventService {
 
     }
 
-    getAllEvents():Event[] { return this.allEvents; } //TODO: stub
+    public getAllEvents():Event[] { //TODO return promise/observer
+        return this.allEvents;
 
-    getEventByID(eventID:string):Event { return null; } //TODO: stub
+        //future: get local, then return DB
 
-    saveEvent(event:Event):boolean {return true;} //TODO: stub
+    }
+
+    public getEventByID(eventID:string):Event {  //TODO: promise/observer
+        // returns the FIRST matching eventID
+        let allEvents:Event[] = this.getAllEvents();
+        for (let evt of allEvents) {
+            if (eventID == evt.eventID) {
+                return evt;
+            }
+        }
+        return null;
+    }
+
+    public saveEvent(event:Event):boolean { //TODO: promise/observer, save to DB
+        let allEvents:Event[] = this.getAllEvents();
+        let duplicateFound :boolean = false;
+        for (let evt of allEvents) {
+            if (event.eventID == evt.eventID) {
+                duplicateFound = true;
+            }
+        }
+
+        if (!duplicateFound) {
+            this.allEvents.push(event);  //TODO: actually check something
+            return true;
+        }
+        return false;  //TODO: throw error
+    }
 
 
 
