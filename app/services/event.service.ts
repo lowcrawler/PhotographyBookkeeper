@@ -34,22 +34,36 @@ export class EventService {
 
     }
 
-    public getAllEvents():Event[] { //TODO return promise/observer
-        return this.allEvents;
+    public getAllEvents():Promise<Event[]> {
+        // return  Promise.resolve(this.allEvents);
 
-        //future: get local, then return DB
+        return new Promise((resolve,reject)=> {
+            //TODO: pull from DB
+            if (true) { // if there weren't any errors //TODO, actually check
+                resolve(this.allEvents); // resolve passes to the "then" of the caller
+            }
+            else {
+                reject(this.allEvents);  // reject passed to the catch
+            }
+        });
 
+
+        //future: pull from local and then DB, convert to observer
     }
 
-    public getEventByID(eventID:string):Event {  //TODO: promise/observer
+
+    public getEventByID(eventID:string):Promise<Event> {  //TODO: promise/observer
         // returns the FIRST matching eventID
-        let allEvents:Event[] = this.getAllEvents();
-        for (let evt of allEvents) {
-            if (eventID == evt.eventID) {
-                return evt;
+
+        this.getAllEvents().then( (allEvents) => {
+            for (let evt of allEvents) {
+                if (eventID == evt.eventID) {
+                    return evt;
+                }
             }
-        }
-        return null;
+            return null;
+        });
+
     }
 
     public saveEvent(event:Event):boolean { //TODO: promise/observer, save to DB
