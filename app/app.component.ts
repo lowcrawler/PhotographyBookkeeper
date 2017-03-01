@@ -47,17 +47,17 @@ export class AppComponent implements OnInit {
                 }
             )
             .catch(
-                (err) => console.log("ERROR: " + err)
+                (err) => console.log("ERROR--(should NOT see): " + err)
             );
         let getByIDFail = this.eventService.getEventByID("90")
             .then(
                 (event) => {
-                    console.log("---getEventByID(90)--(should fail)-");
+                    console.log("---getEventByID(90)--(should NOT see)-");
                     console.log(event);
                 }
             )
             .catch(
-                (err) => console.log("ERROR: " + err)
+                (err) => console.log("ERROR (this message is what we expect for eventID 90): " + err)
             );
 
 

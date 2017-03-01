@@ -37,7 +37,7 @@ export class EventService {
     }
 
     public getAllEvents():Promise<Event[]> {
-        // return  Promise.resolve(this.allEvents);
+        // returns promise for ALL events
 
         return new Promise((resolve,reject)=> {
             //TODO: pull from DB
@@ -49,13 +49,12 @@ export class EventService {
             }
         });
 
-
         //future: pull from local and then DB, convert to observer
     }
 
 
-    public getEventByID(eventID:string):Promise<Event> {  //TODO: promise/observer
-        // returns the FIRST matching eventID
+    public getEventByID(eventID:string):Promise<Event> {
+        // returns promise for FIRST Event with matching eventID
 
         return new Promise((resolve,reject)=> {
             var ret : Event = null;
@@ -64,36 +63,16 @@ export class EventService {
                     (allEvents) => {
                         for (let evt of allEvents) {
                             if (eventID == evt.eventID) {
-                                ret = evt;
+                                resolve(evt);
                             }
                         }
-
-                        if (ret != null) {
-                            resolve(ret);
-                        } else {
-                            reject("getEventByID Rejected, reason: event " + eventID + " not found");
-                        }
-
+                        reject("getEventByID Rejected, reason: event " + eventID + " not found");
                     }
                 )
                 .catch(
                     (err) => console.log("getEventsByID ERROR: " + err)
                 );
-
-
         });
-
-
-
-        // this.getAllEvents().then( (allEvents) => {
-        //     for (let evt of allEvents) {
-        //         if (eventID == evt.eventID) {
-        //             return evt;
-        //         }
-        //     }
-        //     return null;
-        // });
-
     }
 
     public saveEvent(event:Event):boolean { //TODO: promise/observer, save to DB
