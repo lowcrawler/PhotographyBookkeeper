@@ -26,21 +26,44 @@ export class AppComponent implements OnInit {
 
     ngOnInit():void {
 
-        this.eventService.getAllEvents()
+        // this.eventService.getAllEvents()
+        //     .then(
+        //         (events) => {
+        //             console.log("---getAllEvents--");
+        //             console.log("All Events Returned " + events.length + " elements: ");
+        //             console.log(events);
+        //         })
+        //     .catch(
+        //         (err) => console.log("ERRROR: " + err)
+        //     );
+
+
+
+        let getByIDSuccess = this.eventService.getEventByID("1000")
             .then(
-                (events) => {
-                    console.log("---getAllEvents--");
-                    console.log("All Events Returned " + events.length + " elements: ");
-                    console.log(events);
-                })
+                (event) => {
+                    console.log("---getEventByID(1000)--(should succeed)-");
+                    console.log(event);
+                }
+            )
             .catch(
-                (err) => console.log("ERRROR: " + err)
+                (err) => console.log("ERROR: " + err)
+            );
+        let getByIDFail = this.eventService.getEventByID("90")
+            .then(
+                (event) => {
+                    console.log("---getEventByID(90)--(should fail)-");
+                    console.log(event);
+                }
+            )
+            .catch(
+                (err) => console.log("ERROR: " + err)
             );
 
 
-        // console.log("---getEventByID--");
-        // console.log(this.eventService.getEventByID("1000"));
-        // console.log(this.eventService.getEventByID("sdfdsf"));
+        // console.log("---getEventByID---");
+        // console.log();
+        // // console.log(this.eventService.getEventByID("sdfdsf"));
         // console.log("---saveEvent--");
         // let dupEvent = new Photoshoot("1003","Jack and Jill Engagement","Jill afraid of hills",EventType.Photoshoot, new Date("2017-04-23 16:30:00"),
         //                     new Client(123,"Jack and Jill","Met via Fairy Tale"),2,new Date("2017-04-30"),"St. Anothony Main",ShootType.Engagement);
