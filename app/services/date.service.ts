@@ -7,7 +7,7 @@ export class DateService {
    }
 
    public static parseDate(dateString: string): Date {
-       if (dateString) {
+       if (dateString) { //TODO: eh?
            return new Date(dateString);
        } else {
            return null;

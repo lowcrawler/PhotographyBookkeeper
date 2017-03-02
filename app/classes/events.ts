@@ -1,6 +1,8 @@
 import { Client } from './client';
 import { EventType, ShootType, AccountingCategory } from '../constants';
 
+//TODO: build event names from data if blank
+
 export class Event {
   constructor(
     public eventID: string,
